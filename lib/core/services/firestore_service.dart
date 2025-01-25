@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:friut_app/core/services/firestore_service_abstract.dart';
 
-import 'package:friut_app/features/auth/data/models/user_model.dart';
-import 'package:friut_app/features/auth/domain/entity/user_entity.dart';
-
 class FirestoreService implements DatabaseSerivce {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override

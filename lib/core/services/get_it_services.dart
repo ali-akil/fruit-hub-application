@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:friut_app/core/services/firebase_auth_services.dart';
 import 'package:friut_app/core/services/firestore_service.dart';
 import 'package:friut_app/core/services/firestore_service_abstract.dart';

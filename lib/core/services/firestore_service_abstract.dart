@@ -1,5 +1,3 @@
-import 'package:friut_app/features/auth/domain/entity/user_entity.dart';
-
 abstract class DatabaseSerivce {
   Future<void> addData(
       {required String path,

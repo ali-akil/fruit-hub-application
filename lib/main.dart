@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:friut_app/core/helper_function/on_generate_routes.dart';
-import 'package:friut_app/core/services/custom_bloc_observes.dart';
+
 import 'package:friut_app/core/services/get_it_services.dart';
 import 'package:friut_app/core/services/shared_prefrence_singlton.dart';
 import 'package:friut_app/core/utils/app_colors.dart';
@@ -12,10 +11,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:friut_app/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+/*************  ✨ Codeium Command ⭐  *************/
+/// The main entry point of the application.
+///
+/// This function ensures that Flutter widget binding is initialized before
+/// performing any asynchronous operations. It initializes Firebase with
+/// platform-specific options, sets the FirebaseAuth language code to English,
+/// initializes shared preferences, sets up dependency injection with GetIt,
+/// and runs the FriutHub application.
 
-  Bloc.observer = CustomBlocObserver();
+/******  7ec7c10f-e706-4a7a-b3f4-2e94ef7857a3  *******/ void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

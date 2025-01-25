@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:friut_app/constans.dart';
 import 'package:friut_app/core/errors/exceptions.dart';
 import 'package:friut_app/core/errors/failures.dart';
 
 import 'package:friut_app/core/services/firebase_auth_services.dart';
 import 'package:friut_app/core/services/firestore_service_abstract.dart';
+import 'package:friut_app/core/services/shared_prefrence_singlton.dart';
 import 'package:friut_app/core/utils/backend_end_points.dart';
 import 'package:friut_app/features/auth/data/models/user_model.dart';
 import 'package:friut_app/features/auth/domain/entity/user_entity.dart';
@@ -29,6 +32,7 @@ class AuthRepoImpl extends AuthRepo {
 
       var userEntity = UserModel(name: name, email: user.email!, uId: user.uid);
       await addUserData(user: userEntity);
+      await saveUserData(user: userEntity);
 
       return right(userEntity);
     } on CustomExceptions catch (e) {
@@ -52,6 +56,7 @@ class AuthRepoImpl extends AuthRepo {
       var user = await firebaseAuthServices.signInWithEmailAndPassword(
           email: email, password: password);
       var userEntity = await getUserData(uId: user.uid);
+      await saveUserData(user: userEntity);
       return right(userEntity);
     } on CustomExceptions catch (e) {
       return left(ServerFailure(e.message));
@@ -77,6 +82,8 @@ class AuthRepoImpl extends AuthRepo {
       } else {
         await addUserData(user: userEntity);
       }
+      await saveUserData(user: userEntity);
+
       return right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -107,7 +114,7 @@ class AuthRepoImpl extends AuthRepo {
     await databaseSerivce.addData(
         path: BackendEndPoints.addUserData,
         documentId: user.uId,
-        data: user.toMap());
+        data: UserModel.fromEntity(user).toMap());
   }
 
   Future deleteUser(user) async {
@@ -119,5 +126,11 @@ class AuthRepoImpl extends AuthRepo {
         path: BackendEndPoints.getUserData, documentId: uId);
 
     return UserModel.fromJson(data);
+  }
+
+  @override
+  Future saveUserData({required UserEntity user}) async {
+    var jsonData = jsonEncode(UserModel.fromEntity(user).toMap());
+    await Prefs.setString(kUserData, jsonData);
   }
 }

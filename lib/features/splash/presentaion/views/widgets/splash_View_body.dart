@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:friut_app/constans.dart';
+import 'package:friut_app/core/services/firebase_auth_services.dart';
 import 'package:friut_app/core/services/shared_prefrence_singlton.dart';
 import 'package:friut_app/core/utils/app_images.dart';
 import 'package:friut_app/features/auth/presentation/views/login_view.dart';
@@ -51,16 +52,18 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   /// This method is called from the [//initState] method
   void excuteNaviagtion() {
     bool isOnbordingViewSeen = Prefs.getBool(KisOnBordingViewSeen);
-    bool isLoginTheApp = Prefs.getBool(KisLogintheapp);
+
     Future.delayed(const Duration(seconds: 3), () {
       if (isOnbordingViewSeen) {
-        Navigator.of(context).pushReplacementNamed(LoginView.routeName);
+        var isLoggedIn = FirebaseAuthServices().isLoggedIn();
+
+        if (isLoggedIn) {
+          Navigator.of(context).pushReplacementNamed(HomeView.routeName);
+        } else {
+          Navigator.of(context).pushReplacementNamed(LoginView.routeName);
+        }
       } else {
         Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
-      }
-
-      if (isLoginTheApp) {
-        Navigator.of(context).pushReplacementNamed(HomeView.routeName);
       }
     });
   }

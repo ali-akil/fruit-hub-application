@@ -20,7 +20,6 @@ class signupViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupStates>(
       listener: (context, state) {
         if (state is SignupSuccess) {
-          Prefs.setBool(KisLogintheapp, true);
           CustomSnakbar(
               context: context,
               message: "${S.of(context).titleOnborder1} Fruit Hub",

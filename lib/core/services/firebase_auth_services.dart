@@ -123,4 +123,8 @@ class FirebaseAuthServices {
       throw CustomExceptions(message: S.of(contextLoginView).tryAgainLater);
     }
   }
+
+  bool isLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
 }

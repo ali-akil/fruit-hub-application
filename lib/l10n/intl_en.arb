@@ -29,5 +29,9 @@
 "wrongPassword": "Email or password is incorrect",
 "emailNotFound": "Email not found",
 "emailIsNotVerified": "Email is not verified",
-"invalidEmail": "Email is not valid"}
+"invalidEmail": "Email is not valid",
+"searchAbout":"Search about",
+"more":"more",
+"bestSeler":"Best Seller"
+}
 

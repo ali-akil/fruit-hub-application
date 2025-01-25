@@ -369,6 +369,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Search about`
+  String get searchAbout {
+    return Intl.message(
+      'Search about',
+      name: 'searchAbout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `more`
+  String get more {
+    return Intl.message(
+      'more',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Best Seller`
+  String get bestSeler {
+    return Intl.message(
+      'Best Seller',
+      name: 'bestSeler',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
